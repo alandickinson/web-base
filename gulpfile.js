@@ -32,14 +32,14 @@ var path = {
         js: 'src/js/*.js',
         coffee: 'src/js/*.coffee',
         // style: 'src/css/main.scss',
-        style: 'src/css/main.styl'
+        style: 'src/css/main.styl',
         img: 'src/img/**/*.*',
         fonts: 'src/fonts/**/*.*'
     },
     watch: {
         html: 'src/**/*.html',
         js: 'src/js/**/*.js',
-        coffee: 'src/js/**/*.coffee'
+        coffee: 'src/js/**/*.coffee',
         style: 'src/css/**/*.styl',
         img: 'src/img/**/*.*',
         fonts: 'src/fonts/**/*.*'
@@ -138,6 +138,9 @@ gulp.task('watch', function(){
     watch([path.watch.js], function(event, cb) {
         gulp.start('js:build');
     });
+    watch([path.watch.coffee], function(event, cb) {
+        gulp.start('js:build');
+    })
     watch([path.watch.img], function(event, cb) {
         gulp.start('image:build');
     });
