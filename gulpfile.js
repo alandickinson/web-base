@@ -3,9 +3,7 @@
 var gulp = require('gulp');
 var prefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
-// var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
-// var rigger = require('gulp-rigger');
 var cssmin = require('gulp-minify-css');
 var csso = require('gulp-csso');
 var imagemin = require('gulp-imagemin');
@@ -71,11 +69,10 @@ gulp.task('js:build', function () {
 
     var jsFromCoffeeScript = gulp.src(path.src.coffee)
     .pipe(coffee());
+    var jsLibraries = gulp.src(['src/js/lib-jquery-2.1.4.js','src/js/lib-framework.js']);
+    var js = gulp.src([path.src.js, '!src/js/lib*.js']);
 
-    var js = gulp.src(path.src.js);
-
-    return es.merge(jsFromCoffeeScript, js)
-        // .pipe(rigger())
+    return es.merge(jsLibraries, jsFromCoffeeScript, js)
         .pipe(sourcemaps.init())
         .pipe(concat('all.min.js'))
         .pipe(uglify())
@@ -87,12 +84,6 @@ gulp.task('js:build', function () {
 gulp.task('style:build', function () {
     gulp.src(path.src.style)
         .pipe(sourcemaps.init())
-        // .pipe(sass({
-        //     includePaths: ['src/style/'],
-        //     outputStyle: 'compressed',
-        //     sourceMap: true,
-        //     errLogToConsole: true
-        // }))
         .pipe(stylus())
         .pipe(prefixer())
         .pipe(cssmin())
