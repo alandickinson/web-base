@@ -4,8 +4,29 @@
         <title>Title</title>
         <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
-    <body>
-    Hello
-    <script src="js/all.min.js"></script>
+    <body class="page-home">
+        <div id="site">
+            <header>
+            </header>
+            <div id="site-pages">
+                Hello
+            </div>
+        </div>
+        <script src="js/all.min.js"></script>
+        <script>
+            App.pages.create({
+                key: '#page-home',
+                routes: ['/']
+            }, 'index');
+            App.pages.create({
+                key: '#page-project',
+                routes: ['/project/*']
+            }, 'project');
+            App.pages.create({
+                key: '#page-info',
+                routes: ['/info/']
+            }, 'info');
+        </script>
+        <script>(function(){App.run('#site-pages');})();</script>
     </body>
 </html>
